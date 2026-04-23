@@ -11,9 +11,9 @@ def spela_omgang():
         antal += 1
 
         if gissa < hemligt_tal:
-            print("For lågt!")
+            print("För lågt!")
         elif gissa > hemligt_tal:
-            print("For högt!")
+            print("För högt!")
         else:
             print(f"Rätt! {antal} gissningar.")
             return antal
@@ -43,3 +43,32 @@ def visa_highscore(highscore):
     for i, spelare in enumerate(sorterad, 1):
         print(f"{i}. {spelare['namn']} - {spelare['gissningar']} gissningar")
 
+# Huvudmeny
+def main():
+    while True:
+        print("--- HÖGT/LÅGT ---")
+        print("1. Spela ny omgång")
+        print("2. Visa highscore")
+        print("3. Avsluta")
+        val = input("Välj: ")
+        
+        if val == "1":
+            antal = spela_omgang()
+            namn = input("\nVad heter du? ")
+            spelare = {"namn": namn, "gissningar": antal}
+            
+            highscore = ladda_highscore()
+            highscore.append(spelare)
+            spara_highscore(highscore)
+            
+        elif val == "2":
+            highscore = ladda_highscore()
+            visa_highscore(highscore)
+            
+        elif val == "3":
+            break
+        else:
+            print("Ogiltigt val, försök igen.")
+
+if __name__ == "__main__":
+    main()
